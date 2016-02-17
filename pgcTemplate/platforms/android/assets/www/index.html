@@ -17,7 +17,6 @@
         }
         form{
             color: red;
-            
         }
         
      </style>
@@ -43,18 +42,25 @@
          <form>
             <label for="text-6">MY NAME IS:</label>
             <input type="text" name="text-6" id="text-6" value="" placeholder="Name">
-            
-            <a href="#popupMenu" data-rel="popup" data-transition="slideup" class="ui-btn ui-btn-center ui-btn-a">GAME MODES</a>
-         <div data-role="popup" id="popupMenu" data-theme="a">
-            <ul data-role="listview" data-inset="true" style="min-width: 210px;">
-                <li>CHOOSE A MODE:</li>
-                <a href="#" data-rel="back" class="ui-btn ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-                <li><a href="popupOne" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="one.jpg" style="width:30%">LEARN THE ALPHABET</a></li>
-                <li><a href="popupTwo" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="two.jpg" style="width:30%">TEST YOUR MEMORY</a></li>
-                <li><a href="popupThree" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="three.jpg" style="width:30%">TEST YOUR TIME</a></li>
-         </div>
          </form>
          
+         <ul data-role="listview" data-inset="true">
+            <li><a href="#">
+                <img src="one.jpg">
+            <h2>MODE 1</h2>
+            <p>LEARN THE ALPHABET</p></a>
+            </li>
+            <li><a href="#">
+                <img src="two.jpg">
+            <h2>MODE 2</h2>
+            <p>TEST YOUR MEMORY</p></a>
+            </li>
+            <li><a href="#">
+                <img src="three.jpg">
+            <h2>Mode 3</h2>
+            <p>TEST YOUR TIME</p></a>
+            </li>
+         </ul>
            
         </div>
         <div data-role="footer">
