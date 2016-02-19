@@ -19,7 +19,15 @@
             color: red;
             
         }
+        table#gameGrid img {
+            width: 100%;
+            transition: 0.3s transform linear;
+            transform: rotateY(0);
+        }
         
+        table#gameGrid img.hiding{
+            transform: rotateY(90deg);
+        }
      </style>
      
     <script src="cordova.js"></script>
@@ -31,10 +39,20 @@
         function deviceReady(){
             
         }
+
+        
+        function flip() {
+            $("#C00").addClass('hiding');
+            setTimeout(function() {
+                $("#C00").attr('src',"A.jpg");
+                $('#C00').removeClass('hiding');
+            },300);
+        }
     </script>
 </head>
 <body>
-    <div data-role="page">
+    <!-- Start of page one -->
+    <div data-role="page" id="mainPage">
         <div data-role="header">
             <h1>ALPHA MIND</h1>
         </div>
@@ -49,15 +67,46 @@
             <ul data-role="listview" data-inset="true" style="min-width: 210px;">
                 <li>CHOOSE A MODE:</li>
                 <a href="#" data-rel="back" class="ui-btn ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-                <li><a href="popupOne" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="one.jpg" style="width:30%">LEARN THE ALPHABET</a></li>
-                <li><a href="popupTwo" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="two.jpg" style="width:30%">TEST YOUR MEMORY</a></li>
-                <li><a href="popupThree" data-rel="popup" data-position-to="window" data-transition="fade"><img class="popphoto" src="three.jpg" style="width:30%">TEST YOUR TIME</a></li>
+                <li><a href="#levelOne" data-transition="flip"><img class="popphoto" src="one.jpg" style="width:30%">LEARN THE ALPHABET</a></li>
+                <li><a href="" data-transition="fade"><img class="popphoto" src="two.jpg" style="width:30%">TEST YOUR MEMORY</a></li>
+                <li><a href="" data-transition="fade"><img class="popphoto" src="three.jpg" style="width:30%">TEST YOUR TIME</a></li>
          </div>
          </form>
+         </div>
+        <div data-role="footer">
+            <h1>LEARNING IS SUPER FUN!!</h1>
+        </div>
+    </div><!-- /page -->
+    
+    
+    <!-- Start of page two --> 
+     <div data-role="page" id="levelOne">
+        <div data-role="header">0
+            <h1>LEVEL 1</h1>
+        </div>
+        <div role="main" class="ui-content">
+            <table id="gameGrid">
+            <tr>
+                <td><img src="questionMark.jpg" id="C00" onclick="flip()"></td>
+                <td><img src="C.jpg" id="C10"/></td>
+                <td><img src="B.jpg" id="C20"/></td>
+            </tr>
+            <tr>
+                <td><img src="C.jpg" id="C01"/></td>
+                <td><img src="A.jpg" id="C11"/></td>
+                <td><img src="B.jpg" id="C21"/></td>
+            </tr>
          
-           
+         
+         
+            </table>  
+            
+            
+            
+            <p><a href="#mainPage">Back</a></p>
         </div>
         <div data-role="footer">
+           
             <h1>LEARNING IS SUPER FUN!!</h1>
         </div>
     </div>
