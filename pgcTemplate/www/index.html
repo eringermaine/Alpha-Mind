@@ -19,20 +19,27 @@
             color: red;
             
         }
+        img#tutor{
+            width:20%;
+            margin:4em;
+           
+        }
         table#gameGrid img {
             width: 100%;
             transition: 0.3s transform linear;
             transform: rotateY(0);
         }
-        
         table#gameGrid img.hiding{
             transform: rotateY(90deg);
         }
-     </style>
+       
+    </style>
      
     <script src="cordova.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery.mobile.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/path/to/jquery.flip.min.js"></script>
     <script>
         $(document).on('deviceready',deviceReady);
         
@@ -40,14 +47,44 @@
             
         }
 
-        
-        function flip() {
-            $("#C00").addClass('hiding');
+        var flipped = false;
+        function flip(tag) {
+            $(tag).addClass('hiding'); 
             setTimeout(function() {
-                $("#C00").attr('src',"A.jpg");
-                $('#C00').removeClass('hiding');
+                
+                var thisLetter = $(tag).attr('data-letter')
+                if (flipped) {
+                    var thatLetter = $(flipped).attr('data-letter')
+                    var otherId = flipped;
+                    if (thisLetter==thatLetter) {
+                        console.log("We Got A Match!!")
+                    }else{
+                        console.log("No Match")
+                        
+                        setTimeout(function() {
+                            $(tag)
+                                .removeClass('hiding')
+                                .attr('src',"questionMark.jpg");
+                            $(otherId)
+                                .removeClass('hiding')
+                                .attr('src',"questionMark.jpg");
+                        },600);
+                    }
+                    setTimeout(function() {
+                        $(tag).addClass('hiding');
+                        $(otherId).addClass('hiding');
+                    },300);
+                    flipped=false;
+                }else{
+                   flipped="#"+tag.id;
+                }
+                
+                
+                $(tag).attr('src',thisLetter+".jpg");
+                $(tag).removeClass('hiding'); 
             },300);
-        }
+        }    
+        
     </script>
 </head>
 <body>
@@ -73,6 +110,7 @@
          </div>
          </form>
          </div>
+        <img id="tutor" src="cattutor.jpg">
         <div data-role="footer">
             <h1>LEARNING IS SUPER FUN!!</h1>
         </div>
@@ -81,33 +119,39 @@
     
     <!-- Start of page two --> 
      <div data-role="page" id="levelOne">
-        <div data-role="header">0
+        <div data-role="header">
             <h1>LEVEL 1</h1>
         </div>
         <div role="main" class="ui-content">
             <table id="gameGrid">
             <tr>
-                <td><img src="questionMark.jpg" id="C00" onclick="flip()"></td>
-                <td><img src="C.jpg" id="C10"/></td>
-                <td><img src="B.jpg" id="C20"/></td>
+                <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="A"></td>
+                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="B"></td>
+                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="C"></td>
             </tr>
             <tr>
-                <td><img src="C.jpg" id="C01"/></td>
-                <td><img src="A.jpg" id="C11"/></td>
-                <td><img src="B.jpg" id="C21"/></td>
-            </tr>
-         
-         
+                <td><img src="questionMark.jpg" id="C01" onclick="flip(this)" data-letter="A"></td>
+                <td><img src="questionMark.jpg" id="C11" onclick="flip(this)" data-letter="B"></td>
+                <td><img src="questionMark.jpg" id="C21" onclick="flip(this)" data-letter="C"></td>
          
             </table>  
+       
+        <div class="flipTile">
+            <div class="front">
+               
+            </div>
+            <div class="back">
+                
+            </div>
+        </div>   
             
             
-            
-            <p><a href="#mainPage">Back</a></p>
+            <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"></a>
         </div>
         <div data-role="footer">
            
             <h1>LEARNING IS SUPER FUN!!</h1>
+          
         </div>
     </div>
 </body>
