@@ -13,6 +13,7 @@
         }
         h1{
             color: red;
+            
           
         }
         form{
@@ -48,19 +49,23 @@
         }
 
         var flipped = false;
+        //flip a tile with a setTimeout and added a hiding class
         function flip(tag) {
             $(tag).addClass('hiding'); 
             setTimeout(function() {
                 
                 var thisLetter = $(tag).attr('data-letter')
+                //checks if a tile was flipped and matches
                 if (flipped) {
                     var thatLetter = $(flipped).attr('data-letter')
                     var otherId = flipped;
+                    
                     if (thisLetter==thatLetter) {
                         console.log("We Got A Match!!")
                     }else{
                         console.log("No Match")
-                        
+                    
+                        //added a removeClass to check if the tile matches if not the questionMark reappears after a 600 millisecond delay
                         setTimeout(function() {
                             $(tag)
                                 .removeClass('hiding')
@@ -70,6 +75,7 @@
                                 .attr('src',"questionMark.jpg");
                         },600);
                     }
+                    //switch class after a 300 millisecond delay 
                     setTimeout(function() {
                         $(tag).addClass('hiding');
                         $(otherId).addClass('hiding');
@@ -77,13 +83,32 @@
                     flipped=false;
                 }else{
                    flipped="#"+tag.id;
+                   
                 }
                 
                 
                 $(tag).attr('src',thisLetter+".jpg");
                 $(tag).removeClass('hiding'); 
             },300);
-        }    
+        }
+        //shuffles the tiles randomly when a game begins
+         function newBoard(id="LevelOne, gridW, gridH") {
+            var tiles = gridW * gridH;
+            var letters = tiles/2;
+            for(var i=0; i<letters *2; i++) {
+                var position = Math.floor(Math.random()*tiles);
+                while (spots[position]!=undefined) {
+                    position = Math.floor(Math.random()*tiles);
+                    
+                }
+                
+                
+             
+                           
+           
+         }
+       
+       
         
     </script>
 </head>
@@ -123,6 +148,7 @@
             <h1>LEVEL 1</h1>
         </div>
         <div role="main" class="ui-content">
+            
             <table id="gameGrid">
             <tr>
                 <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="A"></td>
@@ -136,23 +162,37 @@
          
             </table>  
        
-        <div class="flipTile">
-            <div class="front">
-               
-            </div>
-            <div class="back">
-                
-            </div>
-        </div>   
-            
+        
+           
             
             <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"></a>
         </div>
+            
+            <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">WAY TO GO!!</a>
+            <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
+                <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                <img src="goldstar.png" alt="gold star on a popup">
+            </div>
+            
+        <div id="memory_board"></div>
+        <script>
+            newBoard();
+        </script>
+        
+        
+        <img id="tutor" src="cattutor.jpg">
         <div data-role="footer">
            
             <h1>LEARNING IS SUPER FUN!!</h1>
           
         </div>
-    </div>
+    </div><!-- /page -->
+    
+     <!-- Start of page three --> 
+     <div data-role="page" id="levelTwo">
+        <div data-role="header">
+            <h1>LEVEL 2</h1>
+        </div>
+        <div role="main" class="ui-content">
 </body>
 </html>
