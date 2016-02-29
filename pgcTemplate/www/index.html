@@ -25,6 +25,12 @@
             margin:4em;
            
         }
+        table.grid3 td {
+            width: 33%;
+        }
+        table.grid4 td {
+            width: 25%;
+        }
         table#gameGrid img {
             width: 100%;
             transition: 0.3s transform linear;
@@ -48,10 +54,13 @@
             pageId = $('body').pagecontainer('getActivePage').prop('id'); 
             switch (pageId) {
                 case 'levelOne':
-                    newBoard(3,2);
+                    newBoard(3,2,"#levelOne",0);
                     break;
                 case 'levelTwo':
-                    newBoard(4,4);
+                    newBoard(3,2,"#levelTwo",3);
+                    break;
+                case 'levelThree':
+                    newBoard(3,2,"#levelThree",6);
                     break;
             }
             
@@ -66,6 +75,12 @@
         var matches = 0;
         //flip a tile with a setTimeout and added a hiding class
         function flip(tag) {
+            //check to see if tile has been clicked twice 
+            if (flipped=="#"+tag.id) {
+                return;
+            }
+            console.log("Clicked Tile "+tag.id)
+            
             $(tag).addClass('hiding'); 
             setTimeout(function() {
                 
@@ -82,8 +97,18 @@
                             console.log("--LEVEL-COMPLETE--")
                             $('#popupPhotoLandscape').popup('open',{transition:'pop'})
                             setTimeout(function() {
-                                $.mobile.navigate('#levelTwo');
+                                goNextLevel();
+                               
                             },1000);
+                        }else{
+                            setTimeout(function() {
+                            $(tag)
+                                .removeClass('hiding')
+                                .attr('src',"check.png");
+                            $(otherId)
+                                .removeClass('hiding')
+                                .attr('src',"check.png");
+                        },600);
                         }
                     }else{
                         console.log("No Match")
@@ -105,17 +130,19 @@
                     },300);
                     flipped=false;
                 }else{
-                   flipped="#"+tag.id;
+                   flipped=thisPage + " #"+tag.id;
                    
                 }
                 
                 
-                $(tag).attr('src',thisLetter+".jpg");
+                $(tag).attr('src',thisLetter+".png");
                 $(tag).removeClass('hiding'); 
             },300);
         }
+        var thisPage = "#levelOne";
         //shuffles the tiles randomly when a game begins
-         function newBoard( gridW, gridH) {
+         function newBoard( gridW, gridH, currentPageId,letterOffSet) {
+            thisPage = currentPageId;
             var tiles = gridW * gridH;
             var letters = tiles/2;
             var spots = [];
@@ -126,7 +153,7 @@
                     position = Math.floor(Math.random()*tiles);
                     
                 }
-                spots[position] = getLetter(i/2);   
+                spots[position] = getLetter(letterOffSet+i/2);   
                 
             }
             console.log(spots);
@@ -134,14 +161,27 @@
                 var x = i%gridW;
                 var y= Math.floor(i/gridW);
                 var id = ("#C" +x) +y;
-                $(id).attr('data-letter', spots[i]);
+                $(thisPage + " " + id).attr('data-letter', spots[i]);
             }
         }
          
         function getLetter(position) {
             return String.fromCharCode(65+position);
         }
-         
+        var currentLevel = 1;
+         function goNextLevel() {
+            currentLevel++;
+            switch (currentLevel) {
+                case 2:
+                    $.mobile.navigate('#levelTwo');
+                    break;
+                case 3:
+                    $.mobile.navigate('#levelThree');
+                    break;
+            }
+            
+                                
+         }
         </script>
 </head>
 <body>
@@ -177,11 +217,11 @@
     <!-- Start of page two --> 
      <div data-role="page" id="levelOne">
         <div data-role="header">
-            <h1>SMELLY ERIN :D</h1>
+            <h1>LEVEL 1</h1>
         </div>
         <div role="main" class="ui-content">
             
-            <table id="gameGrid">
+            <table id="gameGrid" class="grid3">
             <tr>
                 <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="A"></td>
                 <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="B"></td>
@@ -194,9 +234,6 @@
             </tr>
             </table>  
        
-        
-           
-            
             <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"></a>
         </div>
             
@@ -206,72 +243,87 @@
                 <img src="goldstar.png" alt="gold star on a popup">
             </div>
             
-        
-        
         <img id="tutor" src="cattutor.jpg">
         <div data-role="footer">
            
             <h1>LEARNING IS SUPER FUN!!</h1>
         
+        </div>  
+    </div><!-- /page -->
+    
+     <!-- Start of page three --> 
+    <div data-role="page" id="levelTwo">
+        <div data-role="header">
+            <h1>LEVEL 2</h1>
+        </div>
+        <div role="main" class="ui-content">
+            
+            <table id="gameGrid" class="grid3">
+            <tr>
+                <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="D"></td>
+                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="F"></td>
+                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="E"></td>
+            </tr>
+            <tr>
+                <td><img src="questionMark.jpg" id="C01" onclick="flip(this)" data-letter="E"></td>
+                <td><img src="questionMark.jpg" id="C11" onclick="flip(this)" data-letter="D"></td>
+                <td><img src="questionMark.jpg" id="C21" onclick="flip(this)" data-letter="F"></td>
+            </tr>
+            </table>  
+       
+            <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"></a>
+        </div>
+            
+            <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">WAY TO GO!!</a>
+            <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
+                <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                <img src="goldstar.png" alt="gold star on a popup">
+            </div>
+            
+        <img id="tutor" src="cattutor.jpg">
+        <div data-role="footer">
+           
+            <h1>LEARNING IS SUPER FUN!!</h1>
         </div>  
         
     </div><!-- /page -->
     
-    <div data-role="page" id="levelTwo">
+     <!-- Start of page four --> 
+     <div data-role="page" id="levelThree">
         <div data-role="header">
-            <h1>SMELLIER ERIN :D</h1>
+            <h1>LEVEL 3</h1>
         </div>
         <div role="main" class="ui-content">
             
-            <table id="gameGrid">
+            <table id="gameGrid" class="grid3">
             <tr>
-                <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="A"></td>
-                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="B"></td>
-                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="C"></td>
-                <td><img src="questionMark.jpg" id="C30" onclick="flip(this)" data-letter="C"></td>
+                <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="H"></td>
+                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="I"></td>
+                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="G"></td>
             </tr>
             <tr>
-                <td><img src="questionMark.jpg" id="C01" onclick="flip(this)" data-letter="A"></td>
-                <td><img src="questionMark.jpg" id="C11" onclick="flip(this)" data-letter="B"></td>
-                <td><img src="questionMark.jpg" id="C21" onclick="flip(this)" data-letter="C"></td>
-                <td><img src="questionMark.jpg" id="C31" onclick="flip(this)" data-letter="C"></td>
-            </tr>
-            <tr>
-                <td><img src="questionMark.jpg" id="C02" onclick="flip(this)" data-letter="A"></td>
-                <td><img src="questionMark.jpg" id="C12" onclick="flip(this)" data-letter="B"></td>
-                <td><img src="questionMark.jpg" id="C22" onclick="flip(this)" data-letter="C"></td>
-                <td><img src="questionMark.jpg" id="C32" onclick="flip(this)" data-letter="C"></td>
-            </tr>
-            <tr>
-                <td><img src="questionMark.jpg" id="C03" onclick="flip(this)" data-letter="A"></td>
-                <td><img src="questionMark.jpg" id="C13" onclick="flip(this)" data-letter="B"></td>
-                <td><img src="questionMark.jpg" id="C23" onclick="flip(this)" data-letter="C"></td>
-                <td><img src="questionMark.jpg" id="C33" onclick="flip(this)" data-letter="C"></td>
+                <td><img src="questionMark.jpg" id="C01" onclick="flip(this)" data-letter="I"></td>
+                <td><img src="questionMark.jpg" id="C11" onclick="flip(this)" data-letter="G"></td>
+                <td><img src="questionMark.jpg" id="C21" onclick="flip(this)" data-letter="H"></td>
             </tr>
             </table>  
        
-        
-           
-            
             <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"></a>
         </div>
-            
+             
             <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">WAY TO GO!!</a>
             <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
                 <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                 <img src="goldstar.png" alt="gold star on a popup">
             </div>
             
-        
-        
         <img id="tutor" src="cattutor.jpg">
         <div data-role="footer">
            
             <h1>LEARNING IS SUPER FUN!!</h1>
-        
         </div>  
         
-    </div>
+    </div><!-- /page -->
     
 </body>
 </html>
