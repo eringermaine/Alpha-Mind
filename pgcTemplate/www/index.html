@@ -22,7 +22,8 @@
         }
         img#tutor{
             width:20%;
-            margin:4em;
+            margin-left: 40%;
+            
            
         }
         table.grid3 td {
@@ -62,6 +63,9 @@
                 case 'levelThree':
                     newBoard(3,2,"#levelThree",6);
                     break;
+                case 'levelFour':
+                    newBoard(3,2,"#levelFour",9);
+                    break;
             }
             
         });
@@ -95,7 +99,7 @@
                         matches--;
                         if (matches==0) {
                             console.log("--LEVEL-COMPLETE--")
-                            $('#popupPhotoLandscape').popup('open',{transition:'pop'})
+                            $(thisPage +' #popupPhotoLandscape').popup('open',{transition:'pop'})
                             setTimeout(function() {
                                 goNextLevel();
                                
@@ -178,6 +182,9 @@
                 case 3:
                     $.mobile.navigate('#levelThree');
                     break;
+                case 4:
+                    $.mobile.navigate('#levelFour');
+                    break;
             }
             
                                 
@@ -207,14 +214,19 @@
          </div>
          </form>
          </div>
+        
+        <a href="#popupBasic" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-transition="pop">Let's Play</a>
+        <div data-role="popup" id="popupBasic">
+            <p>Welcome To Alpha Mind, My Name Is Jermaine</p>
+        </div>
+        
         <img id="tutor" src="cattutor.jpg">
         <div data-role="footer">
             <h1>LEARNING IS SUPER FUN!!</h1>
         </div>
     </div><!-- /page -->
     
-    
-    <!-- Start of page two --> 
+     <!-- Start of Page Two --> 
      <div data-role="page" id="levelOne">
         <div data-role="header">
             <h1>LEVEL 1</h1>
@@ -236,22 +248,20 @@
        
             <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"></a>
         </div>
-            
-            <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">WAY TO GO!!</a>
+            <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
             <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
-                <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                 <img src="goldstar.png" alt="gold star on a popup">
             </div>
             
         <img id="tutor" src="cattutor.jpg">
         <div data-role="footer">
            
-            <h1>LEARNING IS SUPER FUN!!</h1>
+            <h1>LEARNING FUN FOR EVERYONE!!</h1>
         
         </div>  
     </div><!-- /page -->
     
-     <!-- Start of page three --> 
+     <!-- Start of Page Three --> 
     <div data-role="page" id="levelTwo">
         <div data-role="header">
             <h1>LEVEL 2</h1>
@@ -274,21 +284,20 @@
             <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"></a>
         </div>
             
-            <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">WAY TO GO!!</a>
+            <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
             <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
-                <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
-                <img src="goldstar.png" alt="gold star on a popup">
+               <img src="goldstar.png" alt="gold star on a popup">
             </div>
             
         <img id="tutor" src="cattutor.jpg">
         <div data-role="footer">
            
-            <h1>LEARNING IS SUPER FUN!!</h1>
+            <h1>LEARNING THROUGH PLAY!!</h1>
         </div>  
         
-    </div><!-- /page -->
+    </div><!-- /page done -->
     
-     <!-- Start of page four --> 
+     <!-- Start of Page Four --> 
      <div data-role="page" id="levelThree">
         <div data-role="header">
             <h1>LEVEL 3</h1>
@@ -310,20 +319,51 @@
        
             <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"></a>
         </div>
-             
-            <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">WAY TO GO!!</a>
+            
+            <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
             <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
-                <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
                 <img src="goldstar.png" alt="gold star on a popup">
             </div>
             
         <img id="tutor" src="cattutor.jpg">
         <div data-role="footer">
-           
-            <h1>LEARNING IS SUPER FUN!!</h1>
+           <h1>PLAY, LEARN, AND GROW!!</h1>
         </div>  
-        
-    </div><!-- /page -->
+    </div><!-- /page done -->
+    
+     <!-- Start of Page Five --> 
+     <div data-role="page" id="levelFour">
+        <div data-role="header">
+            <h1>LEVEL 4</h1>
+        </div>
+        <div role="main" class="ui-content">
+            
+             <table id="gameGrid" class="grid3">
+            <tr>
+                <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="H"></td>
+                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="I"></td>
+                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="G"></td>
+            </tr>
+            <tr>
+                <td><img src="questionMark.jpg" id="C01" onclick="flip(this)" data-letter="I"></td>
+                <td><img src="questionMark.jpg" id="C11" onclick="flip(this)" data-letter="G"></td>
+                <td><img src="questionMark.jpg" id="C21" onclick="flip(this)" data-letter="H"></td>
+            </tr>
+            </table>  
+       
+            <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"></a>
+        </div>
+             
+            <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
+            <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
+               <img src="goldstar.png" alt="gold star on a popup">
+            </div>
+            
+        <img id="tutor" src="cattutor.jpg">
+        <div data-role="footer">
+           <h1>LEARNING FOR LIFE!!</h1>
+        </div>  
+    </div><!-- /page done-->
     
 </body>
 </html>
