@@ -2,30 +2,50 @@
 <html>
 <head>
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1s, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-    <title>Project Template</title>
+    <title>ALPHA MIND</title>
     <link rel="stylesheet" href="css/jquery.mobile.structure.css">
     <link rel="stylesheet" href="css/jquery.mobile.theme.css">
     <link rel="stylesheet" href="css/jquery.mobile.icons.css">
      
      <style>
+
         img#abc{
             width:100%;
         }
         h1{
             color: red;
-            
-          
+            font-size: 48px;
+            text-align: center;
+           
+        }
+        h2{
+            color: red;
+            font-size: 32px;
+            text-align: center;
+           
         }
         form{
             color: red;
-            
+        
         }
-        img#tutor{
+        img#hoverPic{
             width:20%;
             margin-left: 40%;
-            
            
+            
         }
+        .text {
+            font-weight: bold;
+            z-index: 1;
+            position: absolute;
+            right: 60%;
+            top: 70%
+        }
+        
+        .hide {
+            display: none;
+        }
+        
         table.grid3 td {
             width: 33%;
         }
@@ -49,6 +69,21 @@
     <script>
         
          $(document).on('deviceready',deviceReady);
+         
+          $(document).ready(function() {
+                $('.hoverPic').hover(function () {
+                    $(this).stop().animate( {
+                        opacity: .4
+                    }, 200);
+                    $('.text').removeClass('hide');
+                }, function () {
+                    $(this).stop().animate( {
+                        opacity: 1
+                    }, 500);
+                    $('.text').addClass('hide');
+                });
+            });
+            
         
         
         $(document).on( "pagecontainershow", function( event, ui ) {
@@ -187,6 +222,7 @@
                     break;
             }
             
+           
                                 
          }
         </script>
@@ -194,9 +230,7 @@
 <body>
     <!-- Start of page one -->
     <div data-role="page" id="mainPage">
-        <div data-role="header">
-            <h1>ALPHA MIND</h1>
-        </div>
+       <h1>ALPHA MIND</h1>
         <div role="main" class="ui-content">
          <img id="abc" src="letters.jpg">
          <form>
@@ -215,14 +249,13 @@
          </form>
          </div>
         
-        <a href="#popupBasic" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-transition="pop">Let's Play</a>
-        <div data-role="popup" id="popupBasic">
-            <p>Welcome To Alpha Mind, My Name Is Jermaine</p>
+        <div>
+            <div class="text hide">Hi, My Name Is Jermaine</div> <a>
+            <img id="hoverPic" class="hoverPic" src="cattutor.jpg"/>
+            </a>
         </div>
         
-        <img id="tutor" src="cattutor.jpg">
-        <div data-role="footer">
-            <h1>LEARNING IS SUPER FUN!!</h1>
+            <h2>LEARNING IS SUPER FUN!!</h2>
         </div>
     </div><!-- /page -->
     
@@ -252,8 +285,12 @@
             <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
                 <img src="goldstar.png" alt="gold star on a popup">
             </div>
-            
-        <img id="tutor" src="cattutor.jpg">
+         <div>
+            <div class="text hide">Learning The ABC's Is So Much Fun!!</div> <a>
+            <img id="hoverPic" class="hoverPic" src="cattutor.jpg"/>
+            </a>
+        </div>   
+       
         <div data-role="footer">
            
             <h1>LEARNING FUN FOR EVERYONE!!</h1>
@@ -289,7 +326,11 @@
                <img src="goldstar.png" alt="gold star on a popup">
             </div>
             
-        <img id="tutor" src="cattutor.jpg">
+        <div>
+            <div class="text hide">Are We Having Fun Yet?</div> <a>
+            <img id="hoverPic" class="hoverPic" src="cattutor.jpg"/>
+            </a>
+        </div>
         <div data-role="footer">
            
             <h1>LEARNING THROUGH PLAY!!</h1>
@@ -325,7 +366,11 @@
                 <img src="goldstar.png" alt="gold star on a popup">
             </div>
             
-        <img id="tutor" src="cattutor.jpg">
+        <div>
+            <div class="text hide">Keep It Up!! Your Doing Great!!</div> <a>
+            <img id="hoverPic" class="hoverPic" src="cattutor.jpg"/>
+            </a>
+        </div>
         <div data-role="footer">
            <h1>PLAY, LEARN, AND GROW!!</h1>
         </div>  
@@ -340,14 +385,14 @@
             
              <table id="gameGrid" class="grid3">
             <tr>
-                <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="H"></td>
-                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="I"></td>
-                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="G"></td>
+                <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="L"></td>
+                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="J"></td>
+                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="K"></td>
             </tr>
             <tr>
-                <td><img src="questionMark.jpg" id="C01" onclick="flip(this)" data-letter="I"></td>
-                <td><img src="questionMark.jpg" id="C11" onclick="flip(this)" data-letter="G"></td>
-                <td><img src="questionMark.jpg" id="C21" onclick="flip(this)" data-letter="H"></td>
+                <td><img src="questionMark.jpg" id="C01" onclick="flip(this)" data-letter="K"></td>
+                <td><img src="questionMark.jpg" id="C11" onclick="flip(this)" data-letter="L"></td>
+                <td><img src="questionMark.jpg" id="C21" onclick="flip(this)" data-letter="J"></td>
             </tr>
             </table>  
        
@@ -359,7 +404,11 @@
                <img src="goldstar.png" alt="gold star on a popup">
             </div>
             
-        <img id="tutor" src="cattutor.jpg">
+       <div>
+            <div class="text hide">WAY TO GO!! KEEP IT UP!!</div> <a>
+            <img id="hoverPic" class="hoverPic" src="cattutor.jpg"/>
+            </a>
+        </div>
         <div data-role="footer">
            <h1>LEARNING FOR LIFE!!</h1>
         </div>  
