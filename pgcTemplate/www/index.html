@@ -101,6 +101,18 @@
                 case 'levelFour':
                     newBoard(3,2,"#levelFour",9);
                     break;
+                case 'levelFive':
+                    newBoard(3,2,"#levelFive",12);
+                    break;
+                case 'levelSix':
+                    newBoard(3,2,"levelSix",15);
+                    break;
+                case 'levelSeven':
+                    newBoard(3,2,"levelSeven",18);
+                    break;
+                case 'levelEight':
+                    newBoard(3,2,"levelEight",21);
+                    break;
             }
             
         });
@@ -115,7 +127,7 @@
         //flip a tile with a setTimeout and added a hiding class
         function flip(tag) {
             //check to see if tile has been clicked twice 
-            if (flipped=="#"+tag.id) {
+            if (flipped==thisPage+" #"+tag.id) {
                 return;
             }
             console.log("Clicked Tile "+tag.id)
@@ -220,6 +232,18 @@
                 case 4:
                     $.mobile.navigate('#levelFour');
                     break;
+                case 5:
+                    $.mobile.navigate('#levelFive');
+                    break;
+                case 6:
+                    $.mobile.navigate('#levelSix');
+                    break;
+                case 7:
+                    $.mobile.navigate('#levelSeven');
+                    break;
+                case 8:
+                    $.mobile.navigate('#levelEight');
+                    break;
             }
             
            
@@ -228,7 +252,7 @@
         </script>
 </head>
 <body>
-    <!-- Start of page one -->
+    <!-- Start of New Page -->
     <div data-role="page" id="mainPage">
        <h1>ALPHA MIND</h1>
         <div role="main" class="ui-content">
@@ -259,7 +283,7 @@
         </div>
     </div><!-- /page -->
     
-     <!-- Start of Page Two --> 
+     <!-- Start of New Page --> 
      <div data-role="page" id="levelOne">
         <div data-role="header">
             <h1>LEVEL 1</h1>
@@ -298,7 +322,7 @@
         </div>  
     </div><!-- /page -->
     
-     <!-- Start of Page Three --> 
+     <!-- Start of New Page --> 
     <div data-role="page" id="levelTwo">
         <div data-role="header">
             <h1>LEVEL 2</h1>
@@ -338,7 +362,7 @@
         
     </div><!-- /page done -->
     
-     <!-- Start of Page Four --> 
+     <!-- Start of New Page --> 
      <div data-role="page" id="levelThree">
         <div data-role="header">
             <h1>LEVEL 3</h1>
@@ -376,7 +400,7 @@
         </div>  
     </div><!-- /page done -->
     
-     <!-- Start of Page Five --> 
+     <!-- Start of New Page --> 
      <div data-role="page" id="levelFour">
         <div data-role="header">
             <h1>LEVEL 4</h1>
@@ -414,6 +438,157 @@
         </div>  
     </div><!-- /page done-->
     
+    <!-- Start of New Page --> 
+     <div data-role="page" id="levelFive">
+        <div data-role="header">
+            <h1>LEVEL 5</h1>
+        </div>
+        <div role="main" class="ui-content">
+            
+             <table id="gameGrid" class="grid3">
+            <tr>
+                <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="O"></td>
+                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="M"></td>
+                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="N"></td>
+            </tr>
+            <tr>
+                <td><img src="questionMark.jpg" id="C01" onclick="flip(this)" data-letter="M"></td>
+                <td><img src="questionMark.jpg" id="C11" onclick="flip(this)" data-letter="N"></td>
+                <td><img src="questionMark.jpg" id="C21" onclick="flip(this)" data-letter="O"></td>
+            </tr>
+            </table>  
+       
+            <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"></a>
+        </div>
+             
+            <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
+            <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
+               <img src="goldstar.png" alt="gold star on a popup">
+            </div>
+            
+       <div>
+            <div class="text hide">YOUR DOING GREAT!!</div> <a>
+            <img id="hoverPic" class="hoverPic" src="cattutor.jpg"/>
+            </a>
+        </div>
+        <div data-role="footer">
+           <h1>LEARNING FOR LIFE!!</h1>
+        </div>  
+    </div><!-- /page done-->
+    
+     <!-- Start of New Page --> 
+     <div data-role="page" id="levelSix">
+        <div data-role="header">
+            <h1>LEVEL 6</h1>
+        </div>
+        <div role="main" class="ui-content">
+            
+             <table id="gameGrid" class="grid3">
+            <tr>
+                <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="P"></td>
+                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="Q"></td>
+                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="R"></td>
+            </tr>
+            <tr>
+                <td><img src="questionMark.jpg" id="C01" onclick="flip(this)" data-letter="Q"></td>
+                <td><img src="questionMark.jpg" id="C11" onclick="flip(this)" data-letter="R"></td>
+                <td><img src="questionMark.jpg" id="C21" onclick="flip(this)" data-letter="P"></td>
+            </tr>
+            </table>  
+       
+            <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"></a>
+        </div>
+             
+            <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
+            <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
+               <img src="goldstar.png" alt="gold star on a popup">
+            </div>
+            
+       <div>
+            <div class="text hide">YOUR DOING GREAT!!</div> <a>
+            <img id="hoverPic" class="hoverPic" src="cattutor.jpg"/>
+            </a>
+        </div>
+        <div data-role="footer">
+           <h1>LEARNING FOR LIFE!!</h1>
+        </div>  
+    </div><!-- /page done-->
+    
+    <!-- Start of New Page --> 
+     <div data-role="page" id="levelSeven">
+        <div data-role="header">
+            <h1>LEVEL 7</h1>
+        </div>
+        <div role="main" class="ui-content">
+            
+             <table id="gameGrid" class="grid3">
+            <tr>
+                <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="S"></td>
+                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="T"></td>
+                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="U"></td>
+            </tr>
+            <tr>
+                <td><img src="questionMark.jpg" id="C01" onclick="flip(this)" data-letter="T"></td>
+                <td><img src="questionMark.jpg" id="C11" onclick="flip(this)" data-letter="U"></td>
+                <td><img src="questionMark.jpg" id="C21" onclick="flip(this)" data-letter="S"></td>
+            </tr>
+            </table>  
+       
+            <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"></a>
+        </div>
+             
+            <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
+            <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
+               <img src="goldstar.png" alt="gold star on a popup">
+            </div>
+            
+       <div>
+            <div class="text hide">YOUR DOING GREAT!!</div> <a>
+            <img id="hoverPic" class="hoverPic" src="cattutor.jpg"/>
+            </a>
+        </div>
+        <div data-role="footer">
+           <h1>LEARNING FOR LIFE!!</h1>
+        </div>  
+    </div><!-- /page done-->
+    
+     <!-- Start of New Page --> 
+     <div data-role="page" id="levelEight">
+        <div data-role="header">
+            <h1>LEVEL 8</h1>
+        </div>
+        <div role="main" class="ui-content">
+            
+             <table id="gameGrid" class="grid3">
+            <tr>
+                <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="V"></td>
+                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="W"></td>
+                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="X"></td>
+            </tr>
+            <tr>
+                <td><img src="questionMark.jpg" id="C01" onclick="flip(this)" data-letter="X"></td>
+                <td><img src="questionMark.jpg" id="C11" onclick="flip(this)" data-letter="W"></td>
+                <td><img src="questionMark.jpg" id="C21" onclick="flip(this)" data-letter="V"></td>
+            </tr>
+            </table>  
+       
+            <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"></a>
+        </div>
+             
+            <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
+            <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
+               <img src="goldstar.png" alt="gold star on a popup">
+            </div>
+            
+       <div>
+            <div class="text hide">YOUR DOING GREAT!!</div> <a>
+            <img id="hoverPic" class="hoverPic" src="cattutor.jpg"/>
+            </a>
+        </div>
+        <div data-role="footer">
+           <h1>LEARNING FOR LIFE!!</h1>
+        </div>  
+    </div><!-- /page done-->
 </body>
 </html>
 

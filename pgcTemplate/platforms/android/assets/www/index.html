@@ -2,70 +2,418 @@
 <html>
 <head>
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1s, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-    <title>Project Template</title>
+    <title>ALPHA MIND</title>
     <link rel="stylesheet" href="css/jquery.mobile.structure.css">
     <link rel="stylesheet" href="css/jquery.mobile.theme.css">
     <link rel="stylesheet" href="css/jquery.mobile.icons.css">
      
      <style>
+
         img#abc{
             width:100%;
         }
         h1{
             color: red;
-          
+            font-size: 48px;
+            text-align: center;
+           
+        }
+        h2{
+            color: red;
+            font-size: 32px;
+            text-align: center;
+           
         }
         form{
             color: red;
+        
+        }
+        img#hoverPic{
+            width:20%;
+            margin-left: 40%;
+           
+            
+        }
+        .text {
+            font-weight: bold;
+            z-index: 1;
+            position: absolute;
+            right: 60%;
+            top: 70%
         }
         
-     </style>
+        .hide {
+            display: none;
+        }
+        
+        table.grid3 td {
+            width: 33%;
+        }
+        table.grid4 td {
+            width: 25%;
+        }
+        table#gameGrid img {
+            width: 100%;
+            transition: 0.3s transform linear;
+            transform: rotateY(0);
+        }
+        table#gameGrid img.hiding{
+            transform: rotateY(90deg);
+        }
+       
+    </style>
      
     <script src="cordova.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="js/jquery.mobile.js"></script>
     <script>
-        $(document).on('deviceready',deviceReady);
+        
+         $(document).on('deviceready',deviceReady);
+         
+          $(document).ready(function() {
+                $('.hoverPic').hover(function () {
+                    $(this).stop().animate( {
+                        opacity: .4
+                    }, 200);
+                    $('.text').removeClass('hide');
+                }, function () {
+                    $(this).stop().animate( {
+                        opacity: 1
+                    }, 500);
+                    $('.text').addClass('hide');
+                });
+            });
+            
+        
+        
+        $(document).on( "pagecontainershow", function( event, ui ) {
+            pageId = $('body').pagecontainer('getActivePage').prop('id'); 
+            switch (pageId) {
+                case 'levelOne':
+                    newBoard(3,2,"#levelOne",0);
+                    break;
+                case 'levelTwo':
+                    newBoard(3,2,"#levelTwo",3);
+                    break;
+                case 'levelThree':
+                    newBoard(3,2,"#levelThree",6);
+                    break;
+                case 'levelFour':
+                    newBoard(3,2,"#levelFour",9);
+                    break;
+            }
+            
+        });
+        
         
         function deviceReady(){
             
         }
-    </script>
+
+        var flipped = false;
+        var matches = 0;
+        //flip a tile with a setTimeout and added a hiding class
+        function flip(tag) {
+            //check to see if tile has been clicked twice 
+            if (flipped=="#"+tag.id) {
+                return;
+            }
+            console.log("Clicked Tile "+tag.id)
+            
+            $(tag).addClass('hiding'); 
+            setTimeout(function() {
+                
+                var thisLetter = $(tag).attr('data-letter')
+                //checks if a tile was flipped and matches
+                if (flipped) {
+                    var thatLetter = $(flipped).attr('data-letter')
+                    var otherId = flipped;
+                    
+                    if (thisLetter==thatLetter) {
+                        console.log("We Got A Match!!")
+                        matches--;
+                        if (matches==0) {
+                            console.log("--LEVEL-COMPLETE--")
+                            $(thisPage +' #popupPhotoLandscape').popup('open',{transition:'pop'})
+                            setTimeout(function() {
+                                goNextLevel();
+                               
+                            },1000);
+                        }else{
+                            setTimeout(function() {
+                            $(tag)
+                                .removeClass('hiding')
+                                .attr('src',"check.png");
+                            $(otherId)
+                                .removeClass('hiding')
+                                .attr('src',"check.png");
+                        },600);
+                        }
+                    }else{
+                        console.log("No Match")
+                    
+                        //added a removeClass to check if the tile matches if not the questionMark reappears after a 600 millisecond delay
+                        setTimeout(function() {
+                            $(tag)
+                                .removeClass('hiding')
+                                .attr('src',"questionMark.jpg");
+                            $(otherId)
+                                .removeClass('hiding')
+                                .attr('src',"questionMark.jpg");
+                        },600);
+                    }
+                    //switch class after a 300 millisecond delay 
+                    setTimeout(function() {
+                        $(tag).addClass('hiding');
+                        $(otherId).addClass('hiding');
+                    },300);
+                    flipped=false;
+                }else{
+                   flipped=thisPage + " #"+tag.id;
+                   
+                }
+                
+                
+                $(tag).attr('src',thisLetter+".png");
+                $(tag).removeClass('hiding'); 
+            },300);
+        }
+        var thisPage = "#levelOne";
+        //shuffles the tiles randomly when a game begins
+         function newBoard( gridW, gridH, currentPageId,letterOffSet) {
+            thisPage = currentPageId;
+            var tiles = gridW * gridH;
+            var letters = tiles/2;
+            var spots = [];
+            matches = letters;
+            for(var i=0; i<letters *2; i++) {
+                var position = Math.floor(Math.random()*tiles);
+                while (spots[position]!=undefined) {
+                    position = Math.floor(Math.random()*tiles);
+                    
+                }
+                spots[position] = getLetter(letterOffSet+i/2);   
+                
+            }
+            console.log(spots);
+            for(var i=0; i<spots.length; i++) {
+                var x = i%gridW;
+                var y= Math.floor(i/gridW);
+                var id = ("#C" +x) +y;
+                $(thisPage + " " + id).attr('data-letter', spots[i]);
+            }
+        }
+         
+        function getLetter(position) {
+            return String.fromCharCode(65+position);
+        }
+        var currentLevel = 1;
+         function goNextLevel() {
+            currentLevel++;
+            switch (currentLevel) {
+                case 2:
+                    $.mobile.navigate('#levelTwo');
+                    break;
+                case 3:
+                    $.mobile.navigate('#levelThree');
+                    break;
+                case 4:
+                    $.mobile.navigate('#levelFour');
+                    break;
+            }
+            
+           
+                                
+         }
+        </script>
 </head>
 <body>
-    <div data-role="page">
-        <div data-role="header">
-            <h1>ALPHA MIND</h1>
-        </div>
+    <!-- Start of page one -->
+    <div data-role="page" id="mainPage">
+       <h1>ALPHA MIND</h1>
         <div role="main" class="ui-content">
          <img id="abc" src="letters.jpg">
          <form>
             <label for="text-6">MY NAME IS:</label>
             <input type="text" name="text-6" id="text-6" value="" placeholder="Name">
+            
+            <a href="#popupMenu" data-rel="popup" data-transition="slideup" class="ui-btn ui-btn-center ui-btn-a">GAME MODES</a>
+         <div data-role="popup" id="popupMenu" data-theme="a">
+            <ul data-role="listview" data-inset="true" style="min-width: 210px;">
+                <li>CHOOSE A MODE:</li>
+                <a href="#" data-rel="back" class="ui-btn ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+                <li><a href="#levelOne" data-transition="flip"><img class="popphoto" src="one.jpg" style="width:30%">LEARN THE ALPHABET</a></li>
+                <li><a href="" data-transition="fade"><img class="popphoto" src="two.jpg" style="width:30%">TEST YOUR MEMORY</a></li>
+                <li><a href="" data-transition="fade"><img class="popphoto" src="three.jpg" style="width:30%">TEST YOUR TIME</a></li>
+         </div>
          </form>
-         
-         <ul data-role="listview" data-inset="true">
-            <li><a href="#">
-                <img src="one.jpg">
-            <h2>MODE 1</h2>
-            <p>LEARN THE ALPHABET</p></a>
-            </li>
-            <li><a href="#">
-                <img src="two.jpg">
-            <h2>MODE 2</h2>
-            <p>TEST YOUR MEMORY</p></a>
-            </li>
-            <li><a href="#">
-                <img src="three.jpg">
-            <h2>Mode 3</h2>
-            <p>TEST YOUR TIME</p></a>
-            </li>
-         </ul>
+         </div>
+        
+        <div>
+            <div class="text hide">Hi, My Name Is Jermaine</div> <a>
+            <img id="hoverPic" class="hoverPic" src="cattutor.jpg"/>
+            </a>
+        </div>
+        
+            <h2>LEARNING IS SUPER FUN!!</h2>
+        </div>
+    </div><!-- /page -->
+    
+     <!-- Start of Page Two --> 
+     <div data-role="page" id="levelOne">
+        <div data-role="header">
+            <h1>LEVEL 1</h1>
+        </div>
+        <div role="main" class="ui-content">
+            
+            <table id="gameGrid" class="grid3">
+            <tr>
+                <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="A"></td>
+                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="B"></td>
+                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="C"></td>
+            </tr>
+            <tr>
+                <td><img src="questionMark.jpg" id="C01" onclick="flip(this)" data-letter="A"></td>
+                <td><img src="questionMark.jpg" id="C11" onclick="flip(this)" data-letter="B"></td>
+                <td><img src="questionMark.jpg" id="C21" onclick="flip(this)" data-letter="C"></td>
+            </tr>
+            </table>  
+       
+            <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"></a>
+        </div>
+            <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
+            <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
+                <img src="goldstar.png" alt="gold star on a popup">
+            </div>
+         <div>
+            <div class="text hide">Learning The ABC's Is So Much Fun!!</div> <a>
+            <img id="hoverPic" class="hoverPic" src="cattutor.jpg"/>
+            </a>
+        </div>   
+       
+        <div data-role="footer">
            
+            <h1>LEARNING FUN FOR EVERYONE!!</h1>
+        
+        </div>  
+    </div><!-- /page -->
+    
+     <!-- Start of Page Three --> 
+    <div data-role="page" id="levelTwo">
+        <div data-role="header">
+            <h1>LEVEL 2</h1>
+        </div>
+        <div role="main" class="ui-content">
+            
+            <table id="gameGrid" class="grid3">
+            <tr>
+                <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="D"></td>
+                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="F"></td>
+                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="E"></td>
+            </tr>
+            <tr>
+                <td><img src="questionMark.jpg" id="C01" onclick="flip(this)" data-letter="E"></td>
+                <td><img src="questionMark.jpg" id="C11" onclick="flip(this)" data-letter="D"></td>
+                <td><img src="questionMark.jpg" id="C21" onclick="flip(this)" data-letter="F"></td>
+            </tr>
+            </table>  
+       
+            <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"></a>
+        </div>
+            
+            <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
+            <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
+               <img src="goldstar.png" alt="gold star on a popup">
+            </div>
+            
+        <div>
+            <div class="text hide">Are We Having Fun Yet?</div> <a>
+            <img id="hoverPic" class="hoverPic" src="cattutor.jpg"/>
+            </a>
         </div>
         <div data-role="footer">
-            <h1>LEARNING IS SUPER FUN!!</h1>
+           
+            <h1>LEARNING THROUGH PLAY!!</h1>
+        </div>  
+        
+    </div><!-- /page done -->
+    
+     <!-- Start of Page Four --> 
+     <div data-role="page" id="levelThree">
+        <div data-role="header">
+            <h1>LEVEL 3</h1>
         </div>
-    </div>
+        <div role="main" class="ui-content">
+            
+            <table id="gameGrid" class="grid3">
+            <tr>
+                <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="H"></td>
+                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="I"></td>
+                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="G"></td>
+            </tr>
+            <tr>
+                <td><img src="questionMark.jpg" id="C01" onclick="flip(this)" data-letter="I"></td>
+                <td><img src="questionMark.jpg" id="C11" onclick="flip(this)" data-letter="G"></td>
+                <td><img src="questionMark.jpg" id="C21" onclick="flip(this)" data-letter="H"></td>
+            </tr>
+            </table>  
+       
+            <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"></a>
+        </div>
+            
+            <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
+            <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
+                <img src="goldstar.png" alt="gold star on a popup">
+            </div>
+            
+        <div>
+            <div class="text hide">Keep It Up!! Your Doing Great!!</div> <a>
+            <img id="hoverPic" class="hoverPic" src="cattutor.jpg"/>
+            </a>
+        </div>
+        <div data-role="footer">
+           <h1>PLAY, LEARN, AND GROW!!</h1>
+        </div>  
+    </div><!-- /page done -->
+    
+     <!-- Start of Page Five --> 
+     <div data-role="page" id="levelFour">
+        <div data-role="header">
+            <h1>LEVEL 4</h1>
+        </div>
+        <div role="main" class="ui-content">
+            
+             <table id="gameGrid" class="grid3">
+            <tr>
+                <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="L"></td>
+                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="J"></td>
+                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="K"></td>
+            </tr>
+            <tr>
+                <td><img src="questionMark.jpg" id="C01" onclick="flip(this)" data-letter="K"></td>
+                <td><img src="questionMark.jpg" id="C11" onclick="flip(this)" data-letter="L"></td>
+                <td><img src="questionMark.jpg" id="C21" onclick="flip(this)" data-letter="J"></td>
+            </tr>
+            </table>  
+       
+            <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"></a>
+        </div>
+             
+            <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
+            <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
+               <img src="goldstar.png" alt="gold star on a popup">
+            </div>
+            
+       <div>
+            <div class="text hide">WAY TO GO!! KEEP IT UP!!</div> <a>
+            <img id="hoverPic" class="hoverPic" src="cattutor.jpg"/>
+            </a>
+        </div>
+        <div data-role="footer">
+           <h1>LEARNING FOR LIFE!!</h1>
+        </div>  
+    </div><!-- /page done-->
+    
 </body>
 </html>
+
