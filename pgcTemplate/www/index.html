@@ -105,13 +105,13 @@
                     newBoard(3,2,"#levelFive",12);
                     break;
                 case 'levelSix':
-                    newBoard(3,2,"levelSix",15);
+                    newBoard(3,2,"#levelSix",15);
                     break;
                 case 'levelSeven':
-                    newBoard(3,2,"levelSeven",18);
+                    newBoard(3,2,"#levelSeven",18);
                     break;
                 case 'levelEight':
-                    newBoard(3,2,"levelEight",21);
+                    newBoard(5,2,"#levelEight",21);
                     break;
             }
             
@@ -559,16 +559,20 @@
         </div>
         <div role="main" class="ui-content">
             
-             <table id="gameGrid" class="grid3">
+             <table id="gameGrid" class="grid5">
             <tr>
                 <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="V"></td>
                 <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="W"></td>
                 <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="X"></td>
+                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="Y"></td>
+                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="Z"></td>
             </tr>
             <tr>
                 <td><img src="questionMark.jpg" id="C01" onclick="flip(this)" data-letter="X"></td>
                 <td><img src="questionMark.jpg" id="C11" onclick="flip(this)" data-letter="W"></td>
                 <td><img src="questionMark.jpg" id="C21" onclick="flip(this)" data-letter="V"></td>
+                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="Z"></td>
+                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="Y"></td>
             </tr>
             </table>  
        
@@ -586,7 +590,8 @@
             </a>
         </div>
         <div data-role="footer">
-           <h1>LEARNING FOR LIFE!!</h1>
+           <h1>LEARNING FOR LIFE!!</h1
+           >
         </div>  
     </div><!-- /page done-->
 </body>
