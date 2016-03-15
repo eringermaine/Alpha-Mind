@@ -147,10 +147,6 @@
                         if (matches==0) {
                             console.log("--LEVEL-COMPLETE--")
                             $(thisPage +' #popupPhotoLandscape').popup('open',{transition:'pop'})
-                            setTimeout(function() {
-                                goNextLevel();
-                               
-                            },1000);
                         }else{
                             setTimeout(function() {
                             $(tag)
@@ -190,10 +186,18 @@
                 $(tag).removeClass('hiding'); 
             },300);
         }
+        var thisWidth = 3;
+        var thisHeight = 2;
         var thisPage = "#levelOne";
+        var thisOffset = 0;
+        
         //shuffles the tiles randomly when a game begins
          function newBoard( gridW, gridH, currentPageId,letterOffSet) {
+            thisWidth = gridW;
+            thisHeight = gridH;
             thisPage = currentPageId;
+            thisOffset = letterOffSet;
+            
             var tiles = gridW * gridH;
             var letters = tiles/2;
             var spots = [];
@@ -244,17 +248,24 @@
                 case 8:
                     $.mobile.navigate('#levelEight');
                     break;
-            }
-            
-           
-                                
+            }                    
          }
+         function playAgain() {
+            newBoard(thisWidth, thisHeight, thisPage, thisOffset);
+            $(thisPage+" #gameGrid img")
+                .removeClass("hiding")
+                .attr("src","questionMark.jpg")
+            $(thisPage +' #popupPhotoLandscape').popup('close',{transition:'pop'})
+         }
+        function gameOver() {
+            
+        }
         </script>
 </head>
 <body>
     <!-- Start of New Page -->
     <div data-role="page" id="mainPage">
-       <h1>ALPHA MIND</h1>
+       <h1>Erin's Smelly Face</h1>
         <div role="main" class="ui-content">
          <img id="abc" src="letters.jpg">
          <form>
@@ -283,6 +294,8 @@
         </div>
     </div><!-- /page -->
     
+    
+    
      <!-- Start of New Page --> 
      <div data-role="page" id="levelOne">
         <div data-role="header">
@@ -308,18 +321,24 @@
             <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
             <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
                 <img src="goldstar.png" alt="gold star on a popup">
+                <ul data-role="listview" data-inset="true">
+                    <li data-role="list-divider">CONTINUE PLAYING?</li>
+                    <li><a href="#" onclick="goNextLevel()">GO TO NEXT LEVEL</a></li>
+                    <li><a href="#" onclick="playAgain()">PLAY AGAIN</a></li>
+                    <li><a href="#" onclick="gameOver()">GAME OVER</a></li>
+                </ul> 
             </div>
          <div>
             <div class="text hide">Learning The ABC's Is So Much Fun!!</div> <a>
             <img id="hoverPic" class="hoverPic" src="cattutor.jpg"/>
             </a>
-        </div>   
-       
-        <div data-role="footer">
+        </div>
+         
+         <div data-role="footer">
            
             <h1>LEARNING FUN FOR EVERYONE!!</h1>
         
-        </div>  
+        </div>
     </div><!-- /page -->
     
      <!-- Start of New Page --> 
