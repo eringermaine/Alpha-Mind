@@ -12,6 +12,10 @@
         img#abc{
             width:100%;
         }
+        img#congrats{
+            width: 100%;
+        }
+       
         h1{
             color: red;
             font-size: 48px;
@@ -111,7 +115,13 @@
                     newBoard(3,2,"#levelSeven",18);
                     break;
                 case 'levelEight':
-                    newBoard(5,2,"#levelEight",21);
+                    newBoard(3,2,"#levelEight",21);
+                    break;
+                case 'levelNine':
+                    newBoard(3,2,"#levelNine",23);
+                    break;
+                case 'levelComplete':
+                    goNextLevel("#levelComplete");
                     break;
             }
             
@@ -147,14 +157,17 @@
                         if (matches==0) {
                             console.log("--LEVEL-COMPLETE--")
                             $(thisPage +' #popupPhotoLandscape').popup('open',{transition:'pop'})
+                            if (currentLevel==9){
+                            $.mobile.navigate("#levelComplete");
+                            }
                         }else{
                             setTimeout(function() {
                             $(tag)
                                 .removeClass('hiding')
-                                .attr('src',"check.png");
+                                .attr('src',"checkMark.png");
                             $(otherId)
                                 .removeClass('hiding')
-                                .attr('src',"check.png");
+                                .attr('src',"checkMark.png");
                         },600);
                         }
                     }else{
@@ -248,6 +261,13 @@
                 case 8:
                     $.mobile.navigate('#levelEight');
                     break;
+                case 9:
+                    $.mobile.navigate('#levelNine');
+                    break;
+                case 10:
+                    $.mobile.navigate('#levelComplete');
+                    break;
+                    
             }                    
          }
          function playAgain() {
@@ -257,15 +277,14 @@
                 .attr("src","questionMark.jpg")
             $(thisPage +' #popupPhotoLandscape').popup('close',{transition:'pop'})
          }
-        function gameOver() {
-            
-        }
-        </script>
+        
+        
+       </script>
 </head>
 <body>
     <!-- Start of New Page -->
     <div data-role="page" id="mainPage">
-       <h1>Erin's Smelly Face</h1>
+       <h1>ALPHA MIND</h1>
         <div role="main" class="ui-content">
          <img id="abc" src="letters.jpg">
          <form>
@@ -318,6 +337,9 @@
        
             <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"></a>
         </div>
+            
+            
+            
             <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
             <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
                 <img src="goldstar.png" alt="gold star on a popup">
@@ -325,8 +347,8 @@
                     <li data-role="list-divider">CONTINUE PLAYING?</li>
                     <li><a href="#" onclick="goNextLevel()">GO TO NEXT LEVEL</a></li>
                     <li><a href="#" onclick="playAgain()">PLAY AGAIN</a></li>
-                    <li><a href="#" onclick="gameOver()">GAME OVER</a></li>
-                </ul> 
+                </ul>
+           
             </div>
          <div>
             <div class="text hide">Learning The ABC's Is So Much Fun!!</div> <a>
@@ -335,9 +357,7 @@
         </div>
          
          <div data-role="footer">
-           
-            <h1>LEARNING FUN FOR EVERYONE!!</h1>
-        
+           <h1>LEARNING FUN FOR EVERYONE!!</h1>
         </div>
     </div><!-- /page -->
     
@@ -367,6 +387,11 @@
             <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
             <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
                <img src="goldstar.png" alt="gold star on a popup">
+                <ul data-role="listview" data-inset="true">
+                    <li data-role="list-divider">CONTINUE PLAYING?</li>
+                    <li><a href="#" onclick="goNextLevel()">GO TO NEXT LEVEL</a></li>
+                    <li><a href="#" onclick="playAgain()">PLAY AGAIN</a></li>
+                </ul> 
             </div>
             
         <div>
@@ -375,7 +400,6 @@
             </a>
         </div>
         <div data-role="footer">
-           
             <h1>LEARNING THROUGH PLAY!!</h1>
         </div>  
         
@@ -407,6 +431,11 @@
             <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
             <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
                 <img src="goldstar.png" alt="gold star on a popup">
+                <ul data-role="listview" data-inset="true">
+                    <li data-role="list-divider">CONTINUE PLAYING?</li>
+                    <li><a href="#" onclick="goNextLevel()">GO TO NEXT LEVEL</a></li>
+                    <li><a href="#" onclick="playAgain()">PLAY AGAIN</a></li>
+                </ul> 
             </div>
             
         <div>
@@ -445,6 +474,11 @@
             <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
             <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
                <img src="goldstar.png" alt="gold star on a popup">
+                <ul data-role="listview" data-inset="true">
+                    <li data-role="list-divider">CONTINUE PLAYING?</li>
+                    <li><a href="#" onclick="goNextLevel()">GO TO NEXT LEVEL</a></li>
+                    <li><a href="#" onclick="playAgain()">PLAY AGAIN</a></li>
+                </ul> 
             </div>
             
        <div>
@@ -483,6 +517,11 @@
             <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
             <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
                <img src="goldstar.png" alt="gold star on a popup">
+                <ul data-role="listview" data-inset="true">
+                    <li data-role="list-divider">CONTINUE PLAYING?</li>
+                    <li><a href="#" onclick="goNextLevel()">GO TO NEXT LEVEL</a></li>
+                    <li><a href="#" onclick="playAgain()">PLAY AGAIN</a></li>
+                </ul> 
             </div>
             
        <div>
@@ -521,10 +560,15 @@
             <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
             <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
                <img src="goldstar.png" alt="gold star on a popup">
+                <ul data-role="listview" data-inset="true">
+                    <li data-role="list-divider">CONTINUE PLAYING?</li>
+                    <li><a href="#" onclick="goNextLevel()">GO TO NEXT LEVEL</a></li>
+                    <li><a href="#" onclick="playAgain()">PLAY AGAIN</a></li>
+                </ul> 
             </div>
             
        <div>
-            <div class="text hide">YOUR DOING GREAT!!</div> <a>
+            <div class="text hide">KEEP IT UP!!</div> <a>
             <img id="hoverPic" class="hoverPic" src="cattutor.jpg"/>
             </a>
         </div>
@@ -559,10 +603,15 @@
             <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
             <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
                <img src="goldstar.png" alt="gold star on a popup">
+                <ul data-role="listview" data-inset="true">
+                    <li data-role="list-divider">CONTINUE PLAYING?</li>
+                    <li><a href="#" onclick="goNextLevel()">GO TO NEXT LEVEL</a></li>
+                    <li><a href="#" onclick="playAgain()">PLAY AGAIN</a></li>
+                </ul> 
             </div>
             
        <div>
-            <div class="text hide">YOUR DOING GREAT!!</div> <a>
+            <div class="text hide">LEARNING IS SO FUN!!</div> <a>
             <img id="hoverPic" class="hoverPic" src="cattutor.jpg"/>
             </a>
         </div>
@@ -578,20 +627,18 @@
         </div>
         <div role="main" class="ui-content">
             
-             <table id="gameGrid" class="grid5">
+             <table id="gameGrid" class="grid3">
             <tr>
                 <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="V"></td>
                 <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="W"></td>
                 <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="X"></td>
-                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="Y"></td>
-                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="Z"></td>
+               
             </tr>
             <tr>
                 <td><img src="questionMark.jpg" id="C01" onclick="flip(this)" data-letter="X"></td>
                 <td><img src="questionMark.jpg" id="C11" onclick="flip(this)" data-letter="W"></td>
                 <td><img src="questionMark.jpg" id="C21" onclick="flip(this)" data-letter="V"></td>
-                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="Z"></td>
-                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="Y"></td>
+                
             </tr>
             </table>  
        
@@ -601,18 +648,78 @@
             <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
             <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
                <img src="goldstar.png" alt="gold star on a popup">
+                <ul data-role="listview" data-inset="true">
+                    <li data-role="list-divider">CONTINUE PLAYING?</li>
+                    <li><a href="#" onclick="goNextLevel()">GO TO NEXT LEVEL</a></li>
+                    <li><a href="#" onclick="playAgain()">PLAY AGAIN</a></li>
+                </ul> 
             </div>
             
        <div>
+            <div class="text hide">WAY TO GO!!</div> <a>
+            <img id="hoverPic" class="hoverPic" src="cattutor.jpg"/>
+            </a>
+        </div>
+        <div data-role="footer">
+           <h1>LEARNING FOR LIFE!!</h1>
+        </div>  
+    </div><!-- /page done-->
+    
+     <!-- Start of New Page -->
+     <div data-role="page" id="levelNine">
+        <div data-role="header">
+            <h1>LEVEL 9</h1>
+        </div>
+        <div role="main" class="ui-content">
+            
+             <table id="gameGrid" class="grid3">
+            <tr>
+                <td><img src="questionMark.jpg" id="C00" onclick="flip(this)" data-letter="Y"></td>
+                <td><img src="questionMark.jpg" id="C10" onclick="flip(this)" data-letter="Z"></td>
+                <td><img src="questionMark.jpg" id="C20" onclick="flip(this)" data-letter="X"></td>
+               
+            </tr>
+            <tr>
+                <td><img src="questionMark.jpg" id="C01" onclick="flip(this)" data-letter="X"></td>
+                <td><img src="questionMark.jpg" id="C11" onclick="flip(this)" data-letter="Y"></td>
+                <td><img src="questionMark.jpg" id="C21" onclick="flip(this)" data-letter="Z"></td>
+                
+            </tr>
+            </table>  
+       
+            <a href="index.html" class="ui-btn ui-shadow ui-corner-all ui-icon-arrow-l ui-btn-icon-notext"></a>
+        </div>
+          <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" class="ui-btn ui-corner-all ui-shadow ui-btn-inline"></a>
+            <div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15">
+               <img src="greatJob.jpg" alt="gold star on a popup">
+            </div>     
+           
+        <div>
             <div class="text hide">YOUR DOING GREAT!!</div> <a>
             <img id="hoverPic" class="hoverPic" src="cattutor.jpg"/>
             </a>
         </div>
         <div data-role="footer">
-           <h1>LEARNING FOR LIFE!!</h1
-           >
+           <h1>LEARNING FOR LIFE!!</h1>
         </div>  
     </div><!-- /page done-->
+    
+    <!-- Start of New Page -->
+    <div data-role="page" id="levelComplete">
+       <h1>ALPHA MIND</h1>
+        <div role="main" class="ui-content">
+         
+        
+         <img id="congrats" src="congrats.gif">
+         
+         
+        
+        <div data-role="footer">
+           <h1>YOUR AN ALPHABET MASTER!!</h1>
+        </div>  
+    </div><!-- /page done-->
+    
+     
 </body>
 </html>
 
